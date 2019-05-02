@@ -23,7 +23,7 @@ def election(number_of_seats, candidates):
         raise ValueError(
             'John does not like you doing this. Use more seats!'
         )
-    if any(votes for votes in candidates.values() < 0):
+    if any(votes < 0 for votes in candidates.values()):
         raise ValueError(
             'John also does not like negative amounts of votes.'
         )

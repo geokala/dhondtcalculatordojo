@@ -1,0 +1,29 @@
+#! /usr/bin/env python
+import calculator
+from pprint import pprint
+
+SEATS = 42
+
+candidates = {}
+
+while True:
+    input_line = input(
+        'Enter party name (or nothing to finish):',
+    ).strip()
+    if input_line:
+        candidates[input_line] = 0
+    else:
+        break
+
+print("Now it's time to vote!")
+
+for candidate in candidates:
+    votes = int(input('How many votes did {candidate} get?'.format(
+        candidate=candidate,
+    )).strip())
+    candidates[candidate] = votes
+
+
+results = calculator.election(SEATS, candidates)
+
+pprint(results)
