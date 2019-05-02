@@ -7,6 +7,7 @@
 # Quotient = Votes / (number_of_seats_gained_by_this_part + 1)
 # Have we run out of seats? Yes then stop
 #                           No: Goto next round
+import copy
 
 
 def election(number_of_seats, candidates):
@@ -18,4 +19,16 @@ def election(number_of_seats, candidates):
 
     :return: dict of candidates: seats won
     """
+    seats_won = {
+        candidate_name: 0 for candidate_name in candidates
+    }
 
+    quotients = copy.copy(candidates)
+
+    while number_of_seats > 0:
+        highest = max(quotients, key=lambda x: quotients[x])
+        seats_won[highest] += 1
+        number_of_seats -= 1
+        quotients[highest] = candidates[highest] / (seats_won[highest] + 1)
+
+    return seats_won
