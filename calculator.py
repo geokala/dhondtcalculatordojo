@@ -1,12 +1,12 @@
-# First round: Quotient = Votes
-#
-# Each round
-# 
-# Highest quotient gets a seat; recalculate that party's quotient
-# On draw, random
-# Quotient = Votes / (number_of_seats_gained_by_this_part + 1)
-# Have we run out of seats? Yes then stop
-#                           No: Goto next round
+""" First round: Quotient = Votes
+
+Each round
+
+Highest quotient gets a seat; recalculate that party's quotient
+On draw, random
+Quotient = Votes / (number_of_seats_gained_by_this_part + 1)
+Have we run out of seats? Yes then stop
+                          No: Goto next round"""
 import copy
 
 
@@ -19,6 +19,14 @@ def election(number_of_seats, candidates):
 
     :return: dict of candidates: seats won
     """
+    if number_of_seats <= 0:
+        raise ValueError(
+            'John does not like you doing this. Use more seats!'
+        )
+    if any(votes for votes in candidates.values() < 0):
+        raise ValueError(
+            'John also does not like negative amounts of votes.'
+        )
     seats_won = {
         candidate_name: 0 for candidate_name in candidates
     }
